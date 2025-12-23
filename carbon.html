@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2e7d32">
+<title>Carbon Tracker</title>
+</head>
+
+<body>
+<div class="container">
+
+<h2>My Carbon Tracker</h2>
+
+<label>Car travel (km)</label>
+<input id="car" type="number">
+
+
+<label>Electricity used (kWh)</label>
+<input id="elec" type="number">
+
+
+<label>Plastic usage (kg)</label>
+<input id="plastic" type="number">
+
+
+<button onclick="go()">Calculate</button>
+<button onclick="resetForm()">Reset</button>
+
+<p id="out"></p>
+
+<script>
+function go() {
+  let car = document.getElementById("car").value || 0;
+  let elec = document.getElementById("elec").value || 0;
+  let plastic = document.getElementById("plastic").value || 0;
+
+  let total = car * 1 + elec * 2 + plastic * 0.5;
+
+  let message = "";
+if (total < 20) {
+  message = '<span style="color:green;">🌱 Good! Your emissions are low.</span>';
+} else if (total < 40) {
+  message = '<span style="color:orange;">⚠️ Average. Try to reduce tomorrow.</span>';
+} else {
+  message = '<span style="color:red;">🔥 High emissions. Needs improvement.</span>';
+}
+
+  let today = new Date();
+let dateString = today.toLocaleDateString(); // e.g., 22/12/2025
+
+document.getElementById("out").innerHTML =
+    "Date: " + dateString + "<br>" +
+    "Your CO₂ score: " + total + "<br>" + message;
+
+}
+function resetForm() {
+  document.getElementById("car").value = "";
+  document.getElementById("elec").value = "";
+  document.getElementById("plastic").value = "";
+  document.getElementById("out").innerHTML = "";
+}
+
+</script>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f2f6f9;
+  padding: 40px;
+}
+
+.container {
+  background: white;
+  max-width: 400px;
+  margin: auto;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #2e7d32;
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background: #1b5e20;
+}
+
+#out {
+  margin-top: 15px;
+  font-size: 16px;
+  text-align: center;
+}
+@media (max-width: 500px) {
+  .container {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  input {
+    padding: 6px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+}
+
+</style>
+</div>
+
+</body>
+</html>
